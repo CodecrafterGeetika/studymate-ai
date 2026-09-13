@@ -18,7 +18,7 @@ setLoading(true)
   setError('')
   setResult(null)
   try {
-    const response = await fetch('http://localhost:5000/api/generate', {
+    const response = await fetch('https://studymate-ai-pqxs.onrender.com/api/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
