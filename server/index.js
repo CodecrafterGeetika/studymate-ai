@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
-const { GoogleGenAI } = require('@google/genai')
+const Groq = require('groq-sdk')
 
 dotenv.config()
 
@@ -11,8 +11,8 @@ app.use(cors())
 app.use(express.json())
 const PORT = process.env.PORT || 5000
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY
 })
 app.get('/', (req, res) => {
   res.send('StudyMate AI Backend is running!')
@@ -76,13 +76,21 @@ Do not include any text outside the JSON.
 
 `
 
-    const response = await ai.interactions.create({
-      model: 'gemini-3.8-flash',
-      input: prompt
-    })
-    
-    const result = JSON.parse(response.output_text)
+    const response = await groq.chat.completions.create({
+  model: 'openai/gpt-oss-20b',
+  messages: [
+    {
+      role: 'user',
+      content: prompt
+    }
+  ],
+  temperature: 0.7,
+  response_format: {
+    type: 'json_object'
+  }
+})
 
+const result = JSON.parse(response.choices[0].message.content)
 res.json({
   result: result
 })
