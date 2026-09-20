@@ -97,3 +97,26 @@ The goal is not to replace studying, but to make revision more structured and ea
         └──────────────┼──────────────┘
                        ▼
                 Study Guide
+```
+##Project Structure
+```text
+ studymate-ai/
+│
+├── client/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   └── main.jsx
+│   │
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/
+│   ├── index.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── .gitignore
+│
+├── .gitignore
+└── README.md
